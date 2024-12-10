@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig, loadEnv, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import monkey, { cdn, MonkeyUserScript } from 'vite-plugin-monkey';
+import monkey, { cdn, MonkeyUserScript, util } from 'vite-plugin-monkey';
 
 import packageJson from './package.json';
 
@@ -27,7 +27,7 @@ export default defineConfig(async ({ mode, command }) => {
 
     config.server = {
       proxy: {
-        '/shikimori': {
+        '^/shikimori/*': {
           target: 'https://shikimori.one/',
           changeOrigin: true,
           rewrite: (path) => path.replace(/\/shikimori/, ''),
@@ -47,11 +47,22 @@ export default defineConfig(async ({ mode, command }) => {
         userscript,
         build: {
           externalGlobals: {
-            vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js')
+            vue: cdn
+              .jsdelivr('Vue', 'dist/vue.global.prod.js')
+              .concat(
+                cdn.jsdelivr('', 'lib/index.iife.js')[1]('latest', 'vue-demi')
+              )
+              .concat(util.dataUrl(';window.Vue=Vue;window.vue=Vue;'))
+            , pinia: cdn.jsdelivr('Pinia', 'dist/pinia.iife.prod.js')
+            , '@fortawesome/fontawesome-svg-core': cdn.jsdelivr('window["fontawesome-svg-core"]', 'index.js')
+            , '@fortawesome/free-solid-svg-icons': cdn.jsdelivr('window["free-solid-svg-icons"]', 'index.js')
           }
         }
       })
     ],
+    build: {
+      minify: 'esbuild'
+    },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -59,9 +70,15 @@ export default defineConfig(async ({ mode, command }) => {
       }
     },
     define: {
-      'import.meta.env.SCRIPT_NAME': JSON.stringify(userscript.name),
-      'import.meta.env.SCRIPT_VERSION': JSON.stringify(userscript.version),
       'import.meta.env.KODIK_TOKEN': JSON.stringify(env.KODIK_TOKEN)
+    },
+    
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
     }
   });
 });

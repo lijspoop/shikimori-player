@@ -86,7 +86,7 @@ function handlerEvents(
             (predicate) => !predicate(preconditions?.paths)
           ) ||
             preconditions?.paths?.some(
-              (path) => !window.location.pathname.match(path)
+              (path) => !window.location.href.match(path)
             ))
         );
       }

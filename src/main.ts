@@ -1,45 +1,36 @@
-import { createApp } from 'vue';
-import '#/style.css';
-import App from '#/App.vue';
+import Player from '@/player';
+
+let player: Player;
 
 export default <EventHandlerConfig>{
+  init() {
+    player = new Player();
+  },
+  preconditions: {
+    predicates: [
+      () =>
+        !!document.getElementById('animes_show') &&
+        !document.getElementById('shiki_player')
+    ]
+  },
   events: [
     {
-      preconditions: {
-        paths: [ /animes/ ],
-        predicates: [
-          () =>
-            !!document.getElementById('animes_show') &&
-            !document.getElementById('shikimori_player')
-        ]
-      },
       target: document,
       type: [
         'page:load',
         'turbolinks:load',
         [ 'attachEvent', 'DOMContentLoaded' ]
       ],
-      listener: async () => {
-        const app = createApp(App);
-
-        app.mount(
-          (() => {
-            const $app = $('<div>', {
-              class: 'cc anime-player',
-              id: 'shikimori_player'
-            });
-
-            $('.p-animes .b-db_entry').after($app);
-
-            return $app.get()[0];
-          })()
-        );
+      listener: () => {
+        player.render();
       }
     },
     {
       target: document,
       type: 'turbolinks:before-cache',
-      listener: () => {}
+      listener: () => {
+        player.destroy();
+      }
     }
   ]
 };

@@ -1,0 +1,63 @@
+.viewport {
+  width: 100%;
+  background-color: var(--sp-bg-clr);
+  position: relative;
+  
+  .viewport_video {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  .viewport_buttons {
+    display: flex;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    overflow: hidden;
+    background: #252527;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+
+    &._group {
+      gap: 0;
+    }
+
+    .b-button {
+      position: relative;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 8px;
+      min-width: 1px;
+      height: 30px;
+      padding: 0 14px;
+      flex-shrink: 0;
+      color: rgba(0, 0, 0, .8);
+      color: var(--btn-default-text);
+      text-decoration: none;
+      text-align: center;
+      line-height: 30px;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: color .2s ease, border .2s ease, opacity .2s ease, transform .2s ease, filter .2s ease;
+
+      &.icon {
+        padding-left: 0;
+        padding-right: 0;
+        width: 30px;
+      }
+    }
+
+    .b-button {
+      color: #fff;
+    }
+  }
+
+  .viewport_buttons.visible, &:hover .viewport_buttons {
+    opacity: 1;
+  }
+}

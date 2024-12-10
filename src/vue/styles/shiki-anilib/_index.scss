@@ -1,0 +1,66 @@
+@use "sass:meta";
+
+:root {
+  --sp-bg-clr: #000;
+  --sp-active-btn-clr: #456;
+  --sp-inactive-btn-clr: #8697a7;
+  --sp-main-indent: 5px;
+}
+
+.p-animes-show {
+  .shiki-player {
+    .tiny {
+      font-size: 11px;
+    }
+
+    .total {
+      color: #d8d8d8;
+      margin-left: auto;
+    }
+    
+    .sp_container {
+      display: flex;
+
+      &:has(.sp_episodes) {
+        padding: var(--sp-main-indent) 0;
+      }
+
+      &:has(.viewport) {
+        min-height: 29.075em;
+        max-height: 38.8em;
+        height: 29.075em;
+      }
+
+      @include meta.load-css('viewport.scss');
+      
+      @include meta.load-css('sidebar.scss');
+
+      &[data-player-sidebar=hidden] .sp_sidebar {
+        display: none;
+      }
+
+      @include meta.load-css('episodes.scss');
+    }
+
+    .sp_footer {
+      .script-info {
+        color: #9da2a8;
+        cursor: default;
+        font-size: 12px;
+      }
+    }
+    
+    .sp_tabs, .sp_menu, .sp_episodes {
+      .b-button:not(:hover):not(.active,.disabled) {
+        background-color: var(--sp-inactive-btn-clr);
+        border-color: var(--sp-inactive-btn-clr);
+      }
+    }
+
+    .disabled {
+      ::before, ::after {
+        cursor: default;
+      }
+    }
+  }
+}

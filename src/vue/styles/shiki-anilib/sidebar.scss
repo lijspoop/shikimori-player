@@ -1,0 +1,106 @@
+.sp_sidebar {
+  width: 17em;
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+
+  .sp_selection-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 1px;
+    padding-left: var(--sp-main-indent);
+
+    .sp_balancers {
+      margin-bottom: var(--sp-main-indent);
+
+      .title {
+        color: var(--color-text-hint, #123);
+        font-weight: bold;
+      }
+
+      .list {
+        margin-bottom: var(--sp-main-indent);
+
+        .b-tag {
+          border-bottom-color: var(--sp-inactive-btn-clr);
+          cursor: pointer;
+          padding: 1px 3px;
+          margin: 0 var(--sp-main-indent) 0 0;
+          transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
+
+          &.active {
+            background-color: #456;
+            border-bottom-color: #456;
+            color: #fff;
+          }
+
+          &.disabled {
+            cursor: default;
+          }
+
+          &:not(.disabled) {
+            &:hover {
+              background-color: #2b8acc;
+              border-bottom-color: #2b8acc;
+              color: #fff;
+            }
+  
+            &:active {
+              background-color: #1d78b7;
+              border-bottom-color: #1d78b7;
+            }
+          }
+        }
+      }
+    }
+
+    .sp_tabs {
+      display: flex;
+      gap: var(--sp-main-indent);
+      margin-bottom: var(--sp-main-indent);
+
+      .total {
+        margin-left: 6px;
+      }
+    }
+
+    .sp_menu {
+      overflow-y: auto;
+
+      .menu-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .inner {
+          display: flex;
+          justify-content: space-between;
+          gap: 2px;
+          flex-direction: column;
+          overflow-y: auto;
+        }
+
+        .b-button {
+          position: relative;
+          display: flex;
+        }
+      }
+    }
+
+    .sp_menu .menu-list .b-button, .b-button:not(.disabled) {
+      -webkit-user-select: auto;
+      -moz-user-select: auto;
+      -ms-user-select: auto;
+      user-select: auto;
+    }
+
+    .sp_menu .menu-list .b-button:not(.active), .b-tag.disabled {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+}

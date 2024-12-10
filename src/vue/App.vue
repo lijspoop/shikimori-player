@@ -1,33 +1,29 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import HelloWorld from '#/components/HelloWorld.vue';
+import { ref } from 'vue';
+import PlayerContent from '#/components/PlayerContent.vue';
+import PlayerSidebar from '#/components/PlayerSidebar.vue';
+import PlayerFooter from '#/components/PlayerFooter.vue';
+import PlayerEpisodes from '#/components/lists/EpisodeList.vue';
 
-import { GM_info } from '$'; 
 
-const logo = computed(() => {
-  const icon = new URL(GM_info.script.icon || '');
-  icon.searchParams.set('sz', '256');
-  return icon.toString();
-});
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '#/stores/main';
+const main = useMainStore();
+const { sidebarVisible } = storeToRefs(main);
+
+const headline = ref('Смотреть');
 </script>
 
 <template>
-  <div>
-    <a href="/shikimori">
-      <img :src="logo" class="logo" alt="Shikimori logo">
-    </a>
+  <div class="subheadline">{{ headline }}</div>
+  <div class="block">
+    <CustomContainer :data-player-sidebar="sidebarVisible ? 'visible' : 'hidden'" data-player-container>
+      <PlayerContent />
+      <PlayerSidebar />
+    </CustomContainer>
+    <CustomContainer>
+      <PlayerEpisodes />
+    </CustomContainer>
+    <PlayerFooter />
   </div>
-  <HelloWorld :msg="GM_info.script.name" />
 </template>
-
-<style scoped>
-.logo {
-  height: 12em;
-  padding: 1.5em;
-  will-change: filter;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #ffffffaa);
-}
-</style>
