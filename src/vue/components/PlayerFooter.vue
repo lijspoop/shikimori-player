@@ -4,7 +4,7 @@ const version = GM_info.script.version.split('.');
 </script>
 
 <template>
-  <div class="sp_footer">
+  <div class="sp-footer">
     <div 
       class="script-info"
       :data-name="GM_info.script.name"

@@ -1,20 +1,34 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import BalancerItem from '#/components/items/BalancerItem.vue';
-const balancerTitle = ref('Плеер');
 
-defineProps<{
-  balancers?: object[];
-}>();
+const headline = ref('Плеер');
+
+import { storeToRefs } from 'pinia';
+
+import { useMainStore } from '#/stores/main';
+const mainStore = useMainStore();
+const { getBalancers } = storeToRefs(mainStore);
+
+import { useSelectedStore } from '@/vue/stores/selected';
+const selectedStore = useSelectedStore();
+const { balancerName } = storeToRefs(selectedStore);
 
 </script>
 
 <template>
-  <div class="sp_balancers">
-    <div class="title">{{ balancerTitle }}</div>
+  <div class="sp-balancers">
+    <div class="title">{{ headline }}</div>
     <div class="list">
-      <BalancerItem title="Kodik" is-active data-balancer="0" />
-      <BalancerItem title="Universe" is-disabled data-balancer="1" />
+      <BalancerItem 
+        v-for="(balancer, index) in getBalancers"
+        :key="index"
+        v-bind="{
+          content: balancer.title,
+          active: balancerName === balancer.title
+        }"
+        @click="selectedStore.setBalancerName(balancer.title)"
+        />
     </div>
   </div>
 </template>

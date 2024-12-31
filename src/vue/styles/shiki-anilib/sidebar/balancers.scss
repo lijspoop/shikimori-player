@@ -1,0 +1,22 @@
+.sp-balancers {
+  margin-bottom: var(--sp-main-indent);
+
+  .title {
+    color: var(--color-text-hint, #123);
+    font-weight: bold;
+  }
+
+  .list {
+    .b-tag {
+      &.active {
+        background-color: var(--color-primary-hovered, #456);
+        color: var(--color-text-on-primary, #fff);
+        cursor: default;
+      }
+
+      &.disabled {
+        color: var(--sp-inactive-btn-clr);
+      }
+    }
+  }
+}

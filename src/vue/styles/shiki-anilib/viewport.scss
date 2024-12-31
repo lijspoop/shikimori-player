@@ -1,63 +1,42 @@
-.viewport {
+.sp-viewport {
   width: 100%;
-  background-color: var(--sp-bg-clr);
+  background: var(--sp-background);
   position: relative;
+  backdrop-filter: sepia(1) contrast(0.5) hue-rotate(125deg);
   
-  .viewport_video {
+  &_iframe {
     height: 100%;
     width: 100%;
     position: absolute;
   }
 
-  .viewport_buttons {
+  &_buttons {
     display: flex;
     position: absolute;
     top: 8px;
     right: 8px;
     z-index: 10;
     overflow: hidden;
-    background: #252527;
     transition: opacity 0.3s ease;
     opacity: 0;
 
-    &._group {
-      gap: 0;
-    }
-
-    .b-button {
-      position: relative;
+    .b-link_button {
       z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      column-gap: 8px;
-      min-width: 1px;
-      height: 30px;
-      padding: 0 14px;
-      flex-shrink: 0;
-      color: rgba(0, 0, 0, .8);
-      color: var(--btn-default-text);
-      text-decoration: none;
-      text-align: center;
-      line-height: 30px;
-      -webkit-tap-highlight-color: transparent;
-      cursor: pointer;
-      user-select: none;
-      transition: color .2s ease, border .2s ease, opacity .2s ease, transform .2s ease, filter .2s ease;
 
-      &.icon {
+      &.is-icon {
         padding-left: 0;
         padding-right: 0;
         width: 30px;
+        
+        &.size-lg {
+          height: 32px;
+          line-height: 32px;
+        }
       }
-    }
-
-    .b-button {
-      color: #fff;
     }
   }
 
-  .viewport_buttons.visible, &:hover .viewport_buttons {
+  &_buttons.visible, &:hover &_buttons {
     opacity: 1;
   }
 }

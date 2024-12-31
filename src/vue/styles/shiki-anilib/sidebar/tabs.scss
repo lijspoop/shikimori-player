@@ -1,0 +1,22 @@
+.sp-tabs {
+  min-height: initial;
+  
+  .stat_names .stat_name > a {
+    &:not(.active):has( .size:not([data-total="0"]))::before {
+      background-color: var(--color-primary-reduced);
+    }
+
+    &.active {
+      color: var(--link-hover-color);
+
+      &::before {
+        background-color: var(--color-primary);
+      }
+    }
+  }
+
+  .b-link_button {
+    min-width: unset;
+    margin: 0;
+  }
+}

@@ -1,44 +1,148 @@
-.sp_episodes {
-  width: 100%;
+.sp-episodes {
   position: relative;
-
-  .inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--sp-main-indent) 0;
+  
+  &_buttons {
     display: flex;
-    justify-content: space-between;
-    gap: var(--sp-main-indent);
-    overflow-x: auto;
+    flex-shrink: 0;
+    margin-right: var(--sp-main-indent);
 
-    .b-button {
-      width: 100%;
-      display: inline-flex;
-      justify-content: center;
-      gap: 8px;
-      white-space: nowrap;
-      border: 1px solid transparent;
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    &.sp-buttons .b-link_button {
+      border-radius: var(--border-rounded, 0);
+    }
+  }
 
-      &:not(:hover):not(.active,.disabled) {
-        background-color: transparent;
-        color: var(--icon-color, #5d6974);
+  &_search {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-right: var(--sp-main-indent);
+    width: 200px;
+
+    &_input {
+      position: relative;
+      flex-grow: 1;
+
+      &:has( .found-episodes) .b-input input {
+        --padding-right: 36px;
       }
 
-      &:not(.watched) .item-sign {
-        display: none;
-      }
+      .b-input {
+        position: relative;
+        flex-grow: 1;
+        margin: 0;
 
-      .item-sign {
-        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-      }
+        input {
+          position: relative;
+          line-height: inherit;
+          min-height: 24px;
+          max-width: 200px;
+          padding: var(--padding-main, 0.785px) 10px;
+          padding-right: var(--padding-right);
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
 
-      &:hover, &.active, &.disabled {
-        .item-sign {
-          color: #fff;
+          &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0
+          }
         }
       }
 
-      .item-sign:before, .item-sign:after {
-        width: inherit;
+      .found-episodes {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 6;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 8px;
+        font-size: 12px;
+        box-sizing: border-box;
+        color: #8a8a8e;
+        color: var(--text-secondary);
+        pointer-events: none;
       }
     }
+
+    &_buttons {
+      .b-link_button, .b-link_button:first-child {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &_container {
+    min-width: 1px;
+    position: relative;
+    z-index: 2;
+
+    .arrow {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      cursor: pointer;
+
+      &.left {
+        left: 0;
+        background: linear-gradient(to right, var(--color-surface, #fff) 50%, transparent);
+        padding-right: 14px;
+      }
+      
+      &.right {
+        right: 0;
+        background: linear-gradient(to left, var(--color-surface, #fff) 50%, transparent);
+        padding-left: 14px;
+      }
+
+      &.is-icon .icon {
+        transition: background .3s ease, transform .3s ease
+      }
+
+      &.left:hover .icon {
+        transform: translateX(-4px);
+      }
+
+      &.right:hover .icon {
+        transform: translateX(4px);
+      }
+    }
+
+    .inner {
+      overflow-x: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: var(--sp-main-indent);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+  
+      .b-link_button.highlight span {
+        background: blueviolet;
+        color: #fff;
+        padding-left: 2px;
+        padding-right: 2px;
+        font-weight: 600;
+      }
+    }
+
+    // &.drag, &.drag * {
+    //   cursor: grabbing !important;
+    // }
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 }

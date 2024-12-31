@@ -1,66 +1,143 @@
 @use "sass:meta";
 
 :root {
-  --sp-bg-clr: #000;
+  --sp-background: url(/assets/background/square_bg.png);
   --sp-active-btn-clr: #456;
   --sp-inactive-btn-clr: #8697a7;
+  --sp-transition-color: color 0.25s ease;
   --sp-main-indent: 5px;
+  --sp-main-size: 32px;
 }
 
-.p-animes-show {
-  .shiki-player {
-    .tiny {
-      font-size: 11px;
+.boop {
+  --transition-color: inherit;
+  --padding-main: 4px;
+  --padding-icon: 8.5px;
+}
+
+.p-animes-show  .shiki-player {
+  .tiny {
+    font-size: 11px;
+  }
+
+  :not(.stat_name) > :not(.active, :hover, .disabled) > .size {
+    color: var(--color-text-hint, #777);
+    margin-left: auto;
+  }
+
+  .sp-buttons {
+    display: flex;
+    gap: 12px;
+
+    &.group {
+      gap: 0;
     }
 
-    .total {
-      color: #d8d8d8;
-      margin-left: auto;
+    &.stretch > .b-link_button:not(.is-icon), &.stretch > .sp-buttons {
+      flex: 1 0 0;
     }
+  }
+
+  .b-link_button {
+    white-space: nowrap;
+    display: inline-flex;
+    gap: 8px;
+    margin: 0;
+    padding: 4px 1rem;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    min-width: 1px;
+    position: relative;
+    text-align: center;
+
+    .fa-eye, .fa-bookmark, .number {
+      -webkit-transition: var(--transition-color);
+      transition: var(--transition-color);
+    }
+
+    .fa-eye, .fa-bookmark {
+      color: var(--color-text-hint, #777);
+    }
+
+    &.watched .fa-bookmark {
+      color: var(--color-primary-hovered, #4c86c8);
+    }
+
+    &.watched.dark .fa-bookmark {
+      color: var(--color-text-on-primary, #4c86c8);
+    }
+
+    &:hover {
+      .fa-eye, .fa-bookmark {
+        color: inherit;
+      }
+    }
+  }
+
+  .sp-buttons {
+    .b-link_button {
+      min-width: 32px;
+
+      &:first-child {
+        border-radius: var(--border-rounded, 0) 0 0 var(--border-rounded, 0);
+      }
+
+      &:last-child {
+        border-radius: 0 var(--border-rounded, 0) var(--border-rounded, 0) 0;
+      }
+
+      &.is-icon {
+        padding: var(--padding-icon, 4px);
+
+        &.size-lg {
+          height: 32px;
+          line-height: 32px;
+        }
+
+        .icon {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+  
+  .sp-container {
+    display: flex;
+
+    &.sp-content {
+      max-height: 496px;
+      height: 359px;
+      min-height: 359px;
+
+      &.max-height {
+        height: 496px;
+      }
+    }
+
+    @include meta.load-css('viewport.scss');
     
-    .sp_container {
-      display: flex;
+    @include meta.load-css('sidebar.scss');
 
-      &:has(.sp_episodes) {
-        padding: var(--sp-main-indent) 0;
-      }
-
-      &:has(.viewport) {
-        min-height: 29.075em;
-        max-height: 38.8em;
-        height: 29.075em;
-      }
-
-      @include meta.load-css('viewport.scss');
-      
-      @include meta.load-css('sidebar.scss');
-
-      &[data-player-sidebar=hidden] .sp_sidebar {
-        display: none;
-      }
-
-      @include meta.load-css('episodes.scss');
+    &[data-player-sidebar=hidden] .sp-sidebar {
+      display: none;
     }
+  }
 
-    .sp_footer {
-      .script-info {
-        color: #9da2a8;
-        cursor: default;
-        font-size: 12px;
-      }
-    }
-    
-    .sp_tabs, .sp_menu, .sp_episodes {
-      .b-button:not(:hover):not(.active,.disabled) {
-        background-color: var(--sp-inactive-btn-clr);
-        border-color: var(--sp-inactive-btn-clr);
-      }
-    }
+  @include meta.load-css('episodes.scss');
 
-    .disabled {
-      ::before, ::after {
-        cursor: default;
-      }
+  .sp-footer {
+    .script-info {
+      color: var(--color-text-disabled, #9da2a8);
+      cursor: default;
+      font-size: 12px;
+    }
+  }
+
+  .disabled {
+    &, ::before, ::after {
+      cursor: not-allowed !important;
     }
   }
 }

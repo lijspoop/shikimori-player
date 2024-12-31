@@ -3,12 +3,11 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, loadEnv, UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import monkey, { cdn, MonkeyUserScript, util } from 'vite-plugin-monkey';
+import graphqlLoader from 'vite-plugin-graphql-loader';
 
 import packageJson from './package.json';
 
-export default defineConfig(async ({ mode, command }) => {
-
-  
+export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const userscript = getUserScriptMeta(packageJson);
 
@@ -47,18 +46,24 @@ export default defineConfig(async ({ mode, command }) => {
         userscript,
         build: {
           externalGlobals: {
-            vue: cdn
+            'vue': cdn
               .jsdelivr('Vue', 'dist/vue.global.prod.js')
               .concat(
                 cdn.jsdelivr('', 'lib/index.iife.js')[1]('latest', 'vue-demi')
               )
               .concat(util.dataUrl(';window.Vue=Vue;window.vue=Vue;'))
-            , pinia: cdn.jsdelivr('Pinia', 'dist/pinia.iife.prod.js')
+            , 'pinia': cdn.jsdelivr('Pinia', 'dist/pinia.iife.prod.js')
             , '@fortawesome/fontawesome-svg-core': cdn.jsdelivr('window["fontawesome-svg-core"]', 'index.js')
             , '@fortawesome/free-solid-svg-icons': cdn.jsdelivr('window["free-solid-svg-icons"]', 'index.js')
+            , '@fortawesome/free-regular-svg-icons': cdn.jsdelivr('window["free-regular-svg-icons"]', 'index.js')
+            , 'kodikwrapper': [
+              'KodikWrapper',
+              'https://raw.githubusercontent.com/lijspoop/kodikwrapper/refs/heads/master/dist/index.global.prod.js'
+            ]
           }
         }
-      })
+      }),
+      graphqlLoader()
     ],
     build: {
       minify: 'esbuild'

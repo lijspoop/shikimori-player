@@ -1,18 +1,24 @@
 <script setup lang="ts">
 defineProps<{
-  title: string;
-  isActive?: boolean;
-  isDisabled?: boolean;
+  active?: boolean;
+  disabled?: boolean;
+  content: string;
 }>();
 </script>
 
 <template>
-  <CustomButton
-    type="tag"
-    :is-active
-    :is-disabled
-    :data-title="title"
+  <div
+    :class="[
+      'b-tag',
+      {
+        active,
+        disabled
+      },
+      'balancer'
+    ]"
+    :data-title="content"
+    href
     >
-    <span>{{ title }}</span>
-  </CustomButton>
+    <span>{{ content }}</span>
+  </div>
 </template>

@@ -1,0 +1,31 @@
+query ($ids: String) {
+    animes(ids: $ids) {
+        english
+        episodes
+        episodesAired
+        id
+        isCensored
+        japanese
+        kind
+        licenseNameRu
+        malId
+        name
+        nextEpisodeAt
+        related {
+            anime {
+                id
+            }
+            id
+            relationKind
+        }
+        releasedOn {
+            date
+        }
+        russian
+        status
+        synonyms
+        updatedAt
+        url
+        userRate { id episodes status }
+    }
+}

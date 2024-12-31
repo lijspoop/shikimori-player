@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 pnpm-lock.yaml
+yarn.lock
 
 # Editor directories and files
 .vscode/*
@@ -24,3 +25,5 @@ pnpm-lock.yaml
 *.njsproj
 *.sln
 *.sw?
+
+libs

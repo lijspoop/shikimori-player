@@ -1,18 +1,30 @@
 <script setup lang="ts">
 defineProps<{
-  title: string;
-  isActive?: boolean;
-  isDisabled?: boolean;
+  active?: boolean;
+  disabled?: boolean;
+  content: string;
+  size: number;
 }>();
 </script>
 
 <template>
-  <CustomButton
-    type="button"
-    :is-active
-    :is-disabled
-    :data-title="title"
+  <a
+    :class="[
+      'b-menu-line',
+      'entry',
+      'b-link',
+      {
+        active,
+        disabled
+      }
+    ]"
     >
-    <span>{{ title }}</span>
-  </CustomButton>
+    <span
+      v-if="size !== 0"
+      class="size tiny"
+      >
+      {{ size }}
+    </span>
+    <span class="name" :data-title="content">{{ content }}</span>
+  </a>
 </template>

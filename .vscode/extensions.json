@@ -3,6 +3,7 @@
     "Vue.volar",
     "NicholasHsiang.vscode-vue3-snippets",
     "dbaeumer.vscode-eslint",
-    "mikestead.dotenv"
+    "mikestead.dotenv",
+    "GraphQL.vscode-graphql-syntax"
   ]
 }

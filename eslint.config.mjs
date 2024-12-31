@@ -5,18 +5,21 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: [ '**/node_modules', '**/dist', '**/.eslintcache' ]
+    ignores: [ '**/node_modules', '**/dist', '**/.eslintcache', '**/libs' ]
   },
   eslint.configs.recommended,
   ...typescriptEslint.configs.recommended,
   ...eslintPluginVue.configs['flat/recommended'],
   {
     files: [ '**/*.{js,ts,mjs,mts,jsx,tsx,vue}' ],
-
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: globals.browser,
+      globals: {
+        '$': 'readonly',
+        'SHIKI_USER': 'readonly',
+        ...globals.browser
+      },
       parserOptions: {
         parser: typescriptEslint.parser
       }
@@ -40,7 +43,7 @@ export default [
     }
   },
   {
-    files: [ '**/*.{ts,mts,tsx}' ],
+    files: [ '**/*.{ts,mts,tsx,vue}' ],
     rules: {
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/no-empty-function': 'off',
