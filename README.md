@@ -14,7 +14,7 @@
 
 У вас должен быть установлен [Tampermonkey](https://www.tampermonkey.net/) или другое похожее расширение
 
-Далее перейдите по этой ссылке: https://github.com/lijspoop/shikimori-player/raw/refs/heads/build/shikimori-player.user.js
+Далее перейдите по этой ссылке: https://github.com/lijspoop/shikimori-player/releases/latest/download/shikimori-player.meta.js
 
 Откроется страница и кликните `Установить`, затем перезагрузите сайт shikimori и перейдите на страницу аниме.
 
