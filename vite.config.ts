@@ -105,8 +105,8 @@ function getUserScriptMeta(packageJson) {
     if ('name' in packageJson.author) {
       meta.author += packageJson.author.name;
       meta.namespace = packageJson.author.name + '/' + packageJson.name;
-      meta.updateURL = `https://raw.githubusercontent.com/${meta.namespace}/refs/heads/build/${packageJson.name}.meta.js`;
-      meta.downloadURL = `https://raw.githubusercontent.com/${meta.namespace}/refs/heads/build/${packageJson.name}.user.js`;
+      meta.downloadURL = `https://github.com/${meta.namespace}/releases/latest/download/${packageJson.name}.user.js`;
+      meta.updateURL = `https://github.com/${meta.namespace}/releases/latest/download/${packageJson.name}.meta.js`;
     }
     if ('url' in packageJson.author) {
       meta.author += ` (${packageJson.author.url})`;
