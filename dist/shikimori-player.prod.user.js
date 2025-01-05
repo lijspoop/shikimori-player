@@ -7,8 +7,8 @@
 // @description:ru  Добавляет плееры для просмотра аниме на сайте shikimori.one
 // @license         BSD-2-Clause
 // @icon            https://www.google.com/s2/favicons?sz=64&domain=shikimori.one
-// @downloadURL     https://raw.githubusercontent.com/lijspoop/shikimori-player/refs/heads/build/shikimori-player.prod.user.js
-// @updateURL       https://raw.githubusercontent.com/lijspoop/shikimori-player/refs/heads/build/shikimori-player.meta.js
+// @downloadURL     https://github.com/lijspoop/shikimori-player/releases/latest/download/shikimori-player.user.js
+// @updateURL       https://github.com/lijspoop/shikimori-player/releases/latest/download/shikimori-player.meta.js
 // @match           *://*.shikimori.one/*
 // @match           *://*.shikimori.me/*
 // @require         https://raw.githubusercontent.com/lijspoop/kodikwrapper/refs/heads/master/dist/index.global.prod.js
